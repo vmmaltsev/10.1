@@ -1,41 +1,53 @@
-# Домашнее задание к занятию "`9.5. Prometheus ч.2`" - `Мальцев Виктор`
+# Домашнее задание к занятию 10.1 «Keepalived/vrrp» - `Мальцев Виктор`
 
 ---
 
-### Задание 1
+Задание 1
 
-`Задание 1.
+Разверните топологию из лекции и выполните установку и настройку сервиса Keepalived.
 
-Создайте файл с правилом оповещения, как в лекции, и добавьте его в конфиг Prometheus.
+vrrp_instance test {
 
-Погасите node exporter, стоящий на мониторинге, и прикрепите скриншот раздела оповещений Prometheus, где оповещение будет в статусе Pending.`
+state "name_mode"
 
-1) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_16.png)
+interface "name_interface"
+
+virtual_router_id "number id"
+
+priority "number priority"
+
+advert_int "number advert"
+
+authentication {
+
+auth_type "auth type"
+
+auth_pass "password"
+
+}
+
+unicast_peer {
+
+"ip address host"
+
+}
+
+virtual_ipaddress {
+
+"ip address host" dev "interface" label "interface":vip
+
+}
+
+}
+
+
+
+1) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_21.png)
+2) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_22.png)
+3) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_23.png)
+4) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_24.png)
+5) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_25.png)
+6) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_26.png)
 
 ---
-
-### Задание 2
-
-`Задание 2.
-
-Установите Alertmanager и интегрируйте его с Prometheus.
-
-Прикрепите скриншот Alerts из Prometheus, где правило оповещение будет в статусе Fireing, и скриншот из Alertmanager, где будет видно действующее правило оповещения.`
-
-1) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_17.png)
-2) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_18.png)
-
-
----
-
-### Задание 3
-
-`Задание 3.
-
-Активируйте экспортер метрик в Docker и подключите его к Prometheus.
-
-Приложите скриншот браузера с открытым эндпоинтом, а также скриншот списка таргетов из интерфейса Prometheus.`
-
-1) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_19.png)
-2) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_20.png)
 
