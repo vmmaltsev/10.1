@@ -1,53 +1,79 @@
-# Домашнее задание к занятию 10.1 «Keepalived/vrrp» - `Мальцев Виктор`
+# Домашнее задание к занятию 10.5 «Балансировка нагрузки. HAProxy/Nginx» - `Мальцев Виктор`
 
 ---
 
 Задание 1
 
-Разверните топологию из лекции и выполните установку и настройку сервиса Keepalived.
+Что такое балансировка нагрузки и зачем она нужна?
+Приведите ответ в свободной форме.
 
-vrrp_instance test {
+Ответ:
 
-state "name_mode"
-
-interface "name_interface"
-
-virtual_router_id "number id"
-
-priority "number priority"
-
-advert_int "number advert"
-
-authentication {
-
-auth_type "auth type"
-
-auth_pass "password"
-
-}
-
-unicast_peer {
-
-"ip address host"
-
-}
-
-virtual_ipaddress {
-
-"ip address host" dev "interface" label "interface":vip
-
-}
-
-}
-
-
-
-1) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_21.png)
-2) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_22.png)
-3) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_23.png)
-4) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_24.png)
-5) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_25.png)
-6) ![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_26.png)
+Балансировка нагрузки – это процесс распределения запросов между пулом серверов приложений.
+В результате повышается доступность, масштабируемость, безопасность и производительность приложения.
 
 ---
+
+Задание 2
+
+Чем отличаются алгоритмы балансировки Round Robin и Weighted Round Robin? 
+В каких случаях каждый из них лучше применять?
+
+Приведите ответ в свободной форме.
+
+Ответ:
+
+Round Robin
+Балансировщик держит обычную очередь из серверов. 
+Первый сервер в очереди обрабатывает запрос и помещается в конец очереди и так по кругу. 
+Таким образом сервера равномерно нагружены.
+Лучше использовать если пул серверов имеет одинаковые характеристики.
+
+Weighted Round Robin
+Тот же round robin, но имеет дополнительное свойство — вес сервера. 
+С его помощью мы можем указать балансировщику сколько трафика отправлять на тот или иной сервер. 
+Лучше использовать если в пуле серверов имеется более мощный сервер, таким образом большая часть запросов
+будет отправляться на более мощный сервер.
+
+---
+
+Задание 3
+
+Установите и запустите Haproxy.
+
+Приведите скриншот systemctl status haproxy, где будет видно, что Haproxy запущен.
+
+Ответ:
+
+![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_27.png)
+
+---
+
+Задание 4
+
+Установите и запустите Nginx.
+
+Приведите скриншот systemctl status nginx, где будет видно, что Nginx запущен.
+
+Ответ:
+
+![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_28.png)
+
+---
+
+Задание 5
+
+Настройте Nginx на виртуальной машине таким образом, чтобы при запросе:
+
+curl http://localhost:8088/ping
+
+он возвращал в ответе строчку:
+
+"nginx is configured correctly".
+
+Приведите конфигурации настроенного Nginx сервиса и скриншот результата выполнения команды curl http://localhost:8088/ping.
+
+Ответ:
+
+![alt text](https://github.com/vmmaltsev/screnshot/blob/main/Screenshot_30.png)
 
